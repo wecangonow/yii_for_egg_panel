@@ -1,0 +1,125 @@
+<form class="app-page" name="appCreate" novalidate>
+    <fieldset class="field-common">
+        <legend class="field-title-com">Name</legend>
+        <input class="fieldset-text-com fieldset-appName" ng-model="appSourceData.name" type="text" name="appName" required ng-pattern="/^\w+$/"  ng-blur="blur('appName',appCreate.appName.$error)"  ng-focus="focus('appName')" >
+        <span class="red-star">*</span>
+    </fieldset>
+    <fieldset class="field-common" ng-if="appSourceData.id">
+        <p>
+            <span class="field-title-com">ID</span>
+            <span class="flag">{{ appSourceData.id }}</span>
+        </p>
+    </fieldset>
+    <fieldset class="field-common">
+        <legend class="field-title-com">Time Zone</legend>
+        <div class="select select-host app-zone">
+                <div class="select_main">
+                    <p class="select_main_text select_target"></p>
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="data in timeZones">
+                        <a class="select_content_list_value" data-value="{{data.value}}">{{data.key}}</a>
+                    </li>
+                </ul>
+            </div>
+        <span class="red-star">*</span>
+    </fieldset>
+    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['reportAdmin']" flag-data-key="uid">
+        <legend class="field-title-com">Report Admin</legend>
+        <div>
+            <div class="select select-host select-btn">
+                <div class="select_main">
+                    <input class="select_main_textarea select_target" type="text" value="" placeholder="Account" ng-model="reportAdminSearch">
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="account in accountsData | exclude:selectedAccountuids:'uid' | filter:{nickname: reportAdminSearch} | orderBy:'nickname' ">
+                        <a class="select_content_list_value" data-value="{{ account }}">{{ account.nickname }}</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="button add-select">add</button>
+        </div>
+        <div class="textarea">
+            <span class="flag flag-icon" ng-repeat="account in appSourceData['reportAdmin']">
+                <i data-value="{{ account.uid }}">{{ account.username }}</i>
+                <i class="flag-icon_delete iconfont icon-close" data-value="{{ account.uid }}"></i>
+            </span>
+        </div>
+    </cascadechoice>
+    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['reportViewer']" flag-data-key="uid">
+        <legend class="field-title-com">Report Viewer</legend>
+        <div>
+            <div class="select select-host select-btn">
+                <div class="select_main">
+                    <input class="select_main_textarea select_target" type="text" value="" placeholder="Account" ng-model="reportViewerSearch">
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="account in accountsData | exclude:selectedAccountuids:'uid' | filter:{nickname: reportViewerSearch} | orderBy:'nickname' ">
+                        <a class="select_content_list_value" data-value="{{ account }}">{{ account.nickname }}</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="button add-select">add</button>
+        </div>
+        <div class="textarea">
+            <span class="flag flag-icon" ng-repeat="account in appSourceData['reportViewer']">
+                <i data-value="{{ account.uid }}">{{ account.username }}</i>
+                <i class="flag-icon_delete iconfont icon-close" data-value="{{ account.uid }}"></i>
+            </span>
+        </div>
+    </cascadechoice>
+    <recombination separator="|" recombination-data="appSourceData['processor']">
+        <legend class="field-title-com">Processor(s)</legend>
+        <div class="recombination-menu">
+            <div class="select select-host processor-select recombination-input" required-warn="please fill out the processor">
+                <div class="select_main">
+                    <p class="select_main_text select_target"></p>
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="processor in processors">
+                        <a class="select_content_list_value" data-value="{{ processor }}">{{ processor }}</a>
+                    </li>
+                </ul>
+            </div>
+            <input class="fieldset-text-com recombination-input" type="text" placeholder="event1|event2" required-warn="please fill out the processor event">
+            <button class="button add-select">add</button>
+        </div>
+        <div class="textarea textarea-processor fieldset-processor">
+            <span class="flag flag-icon" ng-repeat="processor in appSourceData['processor']">
+                <i class="flag-text" data-value="{{ processor }}">{{ processor }}</i>
+                <i class="flag-icon_delete iconfont icon-close" data-value="{{ processor }}"></i>
+            </span>
+        </div>
+        <span class="red-star">*</span>
+    </recombination>
+    <fieldset class="field-common">
+        <span class="button-group page-btns" ng-click="submit()">
+            <button class="button button-create-plus"><i class="iconfont icon-plus"></i></button>
+            <button class="button button-create">Create</button>
+        </span>
+        <span class="button-group" onclick="history.back();">
+            <button class="button button-cancel-minus"><i class="iconfont icon-small"></i></button>
+            <button class="button button-cancel">Cancel</button>
+        </span>
+    </fieldset>
+</form>

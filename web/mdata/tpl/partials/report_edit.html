@@ -1,0 +1,286 @@
+<form class="report-page" name="reportFrom" novalidate >
+    <section ng-if="reportIsExisting">
+        <fieldset class="field-common">
+            <legend class="field-title-com">Application Name</legend>
+            <input class="fieldset-text-com report-app" type="text" value="" ng-model="reportSourceData['reportData']['appname']"
+                   ng-readonly="true" />
+        </fieldset>
+        <fieldset class="field-common">
+            <p>
+                <span class="field-title-com">Application ID</span>
+                <span class="flag">{{ reportSourceData['reportData']['appid'] }}</span>
+            </p>
+        </fieldset>
+    </section>
+    <section ng-if="!reportIsExisting">
+        <fieldset class="field-common">
+            <legend class="field-title-com">Application Name</legend>
+            <div class="select select-host select-btn">
+                <div class="select_main">
+                    <p class="select_main_text select_target"></p>
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="appData in appDataList ">
+                        <a class="select_content_list_value" data-value="{{ appData.app.appid }}">{{ appData.app.name }}</a>
+                    </li>
+                </ul>
+            </div>
+        </fieldset>
+        <fieldset class="field-common">
+            <p>
+                <span class="field-title-com">Application ID</span>
+                <span class="flag">{{ reportSourceData['reportData']['appid'] }}</span>
+            </p>
+        </fieldset>
+    </section>
+    <fieldset class="field-common">
+        <legend class="field-title-com">Report Name</legend>
+        <input class="fieldset-text-com fieldset-reportName" type="text" name="reportName" ng-model="reportSourceData['reportData']['report_name']"
+               required ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/" ng-blur="blur('reportName', reportFrom.reportName.$error)" ng-focus="focus('reportName')" />
+        <span class="red-star">*</span>
+    </fieldset>
+    <fieldset class="field-common">
+        <legend class="field-title-com">Describe</legend>
+        <textarea class="fieldset-text-com report-describe" placeholder="Input massage..." ng-model="reportSourceData['reportData']['describe']"></textarea>
+    </fieldset>
+    <recombination separator="|" recombination-data="reportSourceData['reportData']['dimension']">
+        <legend class="field-title-com">Dimension</legend>
+        <div class="recombination-menu">
+            <div class="select select-host select-btn recombination-input" required-warn="please fill out the Dimension">
+                <div class="select_main">
+                    <input class="select_main_textarea select_target" placeholder="" type="text" value="">
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="reportDimension in reportDimensions ">
+                        <a class="select_content_list_value" data-value="{{ reportDimension.value }}">{{ reportDimension.dimension }}</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="button add-select">add</button>
+        </div>
+        <div class="textarea">
+            <span class="flag flag-icon" ng-repeat="dimension in reportSourceData['reportData']['dimension']">
+                <i class="flag-text" data-value="{{ dimension }}">{{ dimension }}</i>
+                <i class="flag-icon_delete iconfont icon-close" data-value="{{ dimension }}"></i>
+            </span>
+        </div>
+    </recombination>
+    <recombination separator="|" recombination-data="reportSourceData['reportData']['filter']">
+        <legend class="field-title-com">Filter</legend>
+        <div class="recombination-menu">
+            <div class="select select-host select-btn select-btn-small recombination-input" required-warn="please fill out the Filter">
+                <div class="select_main">
+                    <input class="select_main_textarea select_target" type="text" value="" />
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="reportDimension in reportDimensions ">
+                        <a class="select_content_list_value" data-value="{{ reportDimension.value }}">{{ reportDimension.dimension }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="select select-host select-btn select-btn-small recombination-input" required-warn="please fill out the Filter Sign">
+                <div class="select_main">
+                    <p class="select_main_text select_target"></p>
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="computeSign in filterComputeSigns ">
+                        <a class="select_content_list_value" data-value="{{ computeSign }}">{{ computeSign }}</a>
+                    </li>
+                </ul>
+            </div>
+            <input class="fieldset-text-com field-text-column recombination-input" type="text" value="" placeholder="Filter Value" required-warn="please fill out the Filter Value"/>
+            <button class="button add-select">add</button>
+        </div>
+        <div class="textarea">
+            <span class="flag flag-icon" ng-repeat="filter in reportSourceData['reportData']['filter']">
+                <i class="flag-text" data-value="{{ filter }}">{{ filter }}</i>
+                <i class="flag-icon_delete iconfont icon-close" data-value="{{ filter }}"></i>
+            </span>
+        </div>
+    </recombination>
+    <valuegroup separator="#@DELIMITER@#" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
+        <legend class="field-title-com">Value Group</legend>
+        <div>
+            <input class="fieldset-text-com field-text-column recombination-input" type="text" placeholder="Value Name" required-warn="please fill out the Value Name"/>
+            <div class="select select-host select-btn-column recombination-input" required-warn="please fill out the Value Type">
+                <div class="select_main">
+                    <p class="select_main_text select_target"></p>
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="type in valueTypes ">
+                        <a class="select_content_list_value" data-value="{{ type.value }}">{{ type.type }}</a>
+                    </li>
+                </ul>
+            </div>
+            <section class="value-group value-group1 inline-block">
+                <div class="select select-host select-btn-column value-group-type recombination-input" required-warn="please fill out the Value">
+                    <div class="select_main">
+                        <p class="select_main_text select_target"></p>
+                        <button class="select_main_btn select_target">
+                            <i class="select_main_btn_icon"></i>
+                        </button>
+                    </div>
+                    <ul class="select_content">
+                        <li class="select_content_arrow"></li>
+                        <li class="select_content_arrow select_content_arrow-mask"></li>
+                        <li class="select_content_list" ng-repeat="(valueName, format) in valueList">
+                            <a class="select_content_list_value select_content_list_value-group" data-value="{{ valueName }}">{{ valueName }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="select select-host select-btn-column value-group-format recombination-input" required-warn="please fill out the complete">
+                    <div class="select_main">
+                        <p class="select_main_text select_target"></p>
+                        <button class="select_main_btn select_target">
+                            <i class="select_main_btn_icon"></i>
+                        </button>
+                    </div>
+                    <ul class="select_content">
+                        <li class="select_content_arrow"></li>
+                        <li class="select_content_arrow select_content_arrow-mask"></li>
+                        <li class="select_content_list" >
+
+                        </li>
+                    </ul>
+                </div>
+                <input class="fieldset-text-com field-text-column recombination-input" type="text" value="" placeholder="" required-warn="please fill out the complete"/>
+            </section>
+            <div class="select select-host select-btn-column recombination-input" required-warn="please fill out the Value Operator">
+                <div class="select_main">
+                    <p class="select_main_text select_target"></p>
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="operator in valueArithmetics ">
+                        <a class="select_content_list_value select_content_list_value-operator" data-value="{{ operator.value }}">{{ operator.arithmetic }}</a>
+                    </li>
+                </ul>
+            </div>
+            <section class="value-group value-group2 inline-block">
+                <div class="select select-host select-btn-column value-group-type recombination-input" required-warn="please fill out the complete">
+                    <div class="select_main">
+                        <p class="select_main_text select_target"></p>
+                        <button class="select_main_btn select_target">
+                            <i class="select_main_btn_icon"></i>
+                        </button>
+                    </div>
+                    <ul class="select_content">
+                        <li class="select_content_arrow"></li>
+                        <li class="select_content_arrow select_content_arrow-mask"></li>
+                        <li class="select_content_list" ng-repeat="(valueName, format) in appData['val_list']">
+                            <a class="select_content_list_value select_content_list_value-group" data-value="{{ valueName }}">{{ valueName }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="select select-host select-btn-column value-group-format recombination-input" required-warn="please fill out the complete">
+                    <div class="select_main">
+                        <p class="select_main_text select_target"></p>
+                        <button class="select_main_btn select_target">
+                            <i class="select_main_btn_icon"></i>
+                        </button>
+                    </div>
+                    <ul class="select_content">
+                        <li class="select_content_arrow"></li>
+                        <li class="select_content_arrow select_content_arrow-mask"></li>
+                        <li class="select_content_list">
+
+                        </li>
+                    </ul>
+                </div>
+                <input class="fieldset-text-com field-text-column recombination-input" type="text" value="" placeholder="" required-warn="please fill out the complete"/>
+            </section>
+            <button class="button add-select">add</button>
+        </div>
+        <div class="textarea teatarea-column">
+            <span class="flag flag-icon" ng-repeat="value in reportSourceData['reportData']['values']">
+                <i class="flag-text" data-value="{{ value['groupValue'] }}">{{ value['value_name'] }}</i>
+                <i class="flag-icon_delete iconfont icon-close" data-value="{{ value['groupValue'] }}"></i>
+            </span>
+        </div>
+        <span class="red-star">*</span>
+    </valuegroup>
+    <cascadechoice select-data="guestUsers" selected-data="selectedGuestUids" flag-data="reportSourceData['reportData']['guestUserValue']"  flag-data-key="uid">
+        <legend class="field-title-com">Report Guest</legend>
+        <div>
+            <div class="select select-host select-btn recombination-input" required-warn="please fill out the Guest User">
+                <div class="select_main">
+                    <input class="select_main_textarea select_target" type="text" value="">
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="guestUser in guestUsers | exclude:selectedGuestUids:'uid' | orderBy:'nickname' ">
+                        <a class="select_content_list_value" data-value="{{ guestUser }}">{{ guestUser.nickname }}</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="button add-select">add</button>
+        </div>
+        <div class="textarea">
+            <span class="flag flag-icon" ng-repeat="guestUser in reportSourceData['reportData']['guestUserValue']">
+                <i class="flag-text" data-value="{{ guestUser.uid }}">{{ guestUser.nickname }}</i>
+                <i class="flag-icon_delete iconfont icon-close" data-value="{{ guestUser.uid }}"></i>
+            </span>
+        </div>
+    </cascadechoice>
+    <fieldset class="field-common">
+        <legend class="field-title-com">Default Date Range</legend>
+        <div class="select select-host report-date">
+            <div class="select_main">
+                <p class="select_main_text select_target"></p>
+                <button class="select_main_btn select_target">
+                    <i class="select_main_btn_icon"></i>
+                </button>
+            </div>
+            <ul class="select_content">
+                <li class="select_content_arrow"></li>
+                <li class="select_content_arrow select_content_arrow-mask"></li>
+                <li class="select_content_list" ng-repeat="dateRange in reportDateRanges ">
+                    <a class="select_content_list_value" data-value="{{ dateRange.value }}">{{ dateRange.meaning }}</a>
+                </li>
+            </ul>
+        </div>
+    </fieldset>
+    <fieldset class="field-common">
+        <span class="button-group page-btns" ng-click="submit()">
+            <button class="button button-create-plus"><i class="iconfont icon-plus"></i></button>
+            <button class="button button-create">Create</button>
+        </span>
+        <span class="button-group">
+            <button class="button button-cancel-minus"><i class="iconfont icon-small"></i></button>
+            <button class="button button-cancel">Cancel</button>
+        </span>
+    </fieldset>
+</form>

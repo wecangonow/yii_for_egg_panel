@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Testing ajax and session</title>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+
+              $.ajax({
+                  url: "http://yiibasic.dev/site/test2",
+                  //data: {
+                  //id: 123
+                  //},
+                  type: "GET",
+                  dataType : "text",
+                  success: function( json ) {
+                  console.log(json);
+
+                  },
+
+                  error: function( xhr, status, errorThrown ) {
+                    alert( "Sorry, there was a problem!" );
+                    console.log( "Error: " + errorThrown );
+                    console.log( "Status: " + status );
+                    console.dir( xhr );
+                  },
+
+                  complete: function( xhr, status ) {
+                    alert( "The request is complete!" );
+                  }
+              });
+    })
+  </script>
+  </head>
+  <body>
+    <a href="index.html">go to index.html</a>
+    
+  </body>
+</html>
