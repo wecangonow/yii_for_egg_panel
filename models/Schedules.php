@@ -32,7 +32,7 @@ class Schedules extends \yii\db\ActiveRecord
     {
         return [
             [['task_host_id', 'timeout', 'is_active'], 'integer'],
-            [['is_active', 'triggers'], 'required'],
+            [['is_active', 'triggers','task_host_id'], 'required'],
             [['triggers'], 'string', 'max' => 1000]
         ];
     }
@@ -44,10 +44,10 @@ class Schedules extends \yii\db\ActiveRecord
     {
         return [
             'taskid' => 'Taskid',
-            'task_host_id' => 'Task Host ID',
+            'task_host_id' => '宿主文件',
             'timeout' => 'Timeout',
-            'is_active' => 'Is Active',
-            'triggers' => 'Triggers',
+            'is_active' => '是否启用',
+            'triggers' => '触发条件',
         ];
     }
 

@@ -4,10 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Schedules;
+use app\models\Hosts;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * SchedulesController implements the CRUD actions for Schedules model.

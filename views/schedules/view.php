@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'taskid',
             'task_host_id',
-            'timeout:datetime',
+            'timeout',
             'is_active',
             'triggers',
         ],

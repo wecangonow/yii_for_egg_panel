@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Schedules';
+$this->title = '定时任务列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="schedules-index">
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Schedules', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('创建定时任务', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'taskid',
             'task_host_id',
-            'timeout:datetime',
+            'timeout',
             'is_active',
             'triggers',
 
