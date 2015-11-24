@@ -4,15 +4,11 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 //use yii\widgets\ActiveForm;
 use app\models\Hosts;
+use app\models\Files;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Tabs;
-/* @var $this yii\web\View */
-/* @var $model app\models\Schedules */
-/* @var $form yii\widgets\ActiveForm */
 ?>
-
 <div class="schedules-form">
-
 	<?php $form = ActiveForm::begin([
             //'layout' => 'horizontal',
             //'fieldConfig' => [
@@ -27,12 +23,13 @@ use yii\bootstrap\Tabs;
             //],
         ]);
     $items = ArrayHelper::map(Hosts::find()->asArray()->all(),'id','url');
+    $file_items = ArrayHelper::map(Files::find()->asArray()->all(),'id','url');
     ?>
-
+    <?= $form->field($model, 'name')->textInput() ?>
     <?= $form->field($model, 'timeout')->textInput() ?>
+    <?= $form->field($model, 'task_file_id')->dropDownList($file_items) ?>
     <?= $form->field($model, 'task_host_id')->dropDownList($items) ?>
     <?= $form->field($model, 'is_active')->radioList(['1'=>'是','0'=>'否']) ?>
-
     <?= Tabs::widget([
         'items' => [
             [

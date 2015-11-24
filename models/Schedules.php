@@ -31,8 +31,9 @@ class Schedules extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['task_host_id', 'timeout', 'is_active'], 'integer'],
-            [['is_active', 'triggers','task_host_id'], 'required'],
+            [['task_host_id','task_file_id', 'timeout', 'is_active'], 'integer'],
+            [['is_active', 'triggers','task_host_id','task_file_id'], 'required'],
+            [['name'], 'string', 'max' => 255],
             [['triggers'], 'string', 'max' => 1000]
         ];
     }
@@ -44,7 +45,9 @@ class Schedules extends \yii\db\ActiveRecord
     {
         return [
             'taskid' => 'Taskid',
+            'name' => '任务名称',
             'task_host_id' => '宿主文件',
+            'task_file_id' => '任务文件',
             'timeout' => 'Timeout',
             'is_active' => '是否启用',
             'triggers' => '触发条件',
