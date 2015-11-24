@@ -30,3 +30,29 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
+
+[
+[{
+    "type":"boot",
+        "delay":20*60
+        }/ 启动延时20分钟
+        {
+            "type":"monthly",
+                "daysOfMonth": 512+16
+                }/每月5日10日执行
+                {
+                    "type":"weekly",
+                        "daysOfWeek": 2+4+8+16+32
+                        } //每周一至五执行
+                        ],
+                        [
+                        {
+                            "type":"boot",
+                                "delay":5*60
+                                }/ 启动延时5分钟
+                                {
+                                    "type":"weekly",
+                                        "daysOfWeek": 1+64
+                                        }// 每周六日执行
+                                        ]
+                                        ]

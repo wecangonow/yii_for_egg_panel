@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "codeception/codeception": "^2.1",
         "zelenin/yii2-rbac-module": "dev-master",
-        "mdmsoft/yii2-admin": "*"
+        "mdmsoft/yii2-admin": "*",
+        "kartik-v/yii2-date-range": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
