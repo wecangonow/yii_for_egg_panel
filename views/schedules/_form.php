@@ -24,6 +24,7 @@ use yii\bootstrap\Tabs;
         ]);
     $items = ArrayHelper::map(Hosts::find()->asArray()->all(),'id','url');
     $file_items = ArrayHelper::map(Files::find()->asArray()->all(),'id','url');
+    $model->is_active = 1;
     ?>
     <?= $form->field($model, 'name')->textInput() ?>
     <?= $form->field($model, 'timeout')->textInput() ?>
@@ -56,7 +57,7 @@ use yii\bootstrap\Tabs;
         ]]);
     ?>
 
-    <?= $form->field($model, 'triggers')->textArea(['rows' => 6]) ?>
+    <?= $form->field($model, 'triggers')->textArea(['rows' => 6,'readonly'=>true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

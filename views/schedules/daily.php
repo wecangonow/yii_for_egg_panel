@@ -35,13 +35,22 @@ use kartik\daterange\DateRangePicker;
     </div>
     <div class="col-lg-2">
         <div class="input-group">
-            <input id="daysInterval" type="text" class="form-control" placeholder="每几天执行一次" aria-describedby="basic-addon2">
+            <input id="daysInterval" type="text" class="form-control" placeholder="每几天执行一次" aria-describedby="basic-addon2" value="1">
             <span class="input-group-addon" id="basic-addon2">天</span>
         </div>
     </div>
 
 </div>
 
+<br />
+<br />
+<div class="row">
+    <div class="col-lg-11">
+    </div>
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-info" id="btn_daily">添加</button>
+    </div>
+</div>
 <br />
 <br />
 

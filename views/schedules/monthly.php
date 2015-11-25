@@ -4,10 +4,10 @@ use kartik\daterange\DateRangePicker;
 
 <br />
 <div class="row">
-    <div class="col-lg-1">
+    <div class="col-lg-2">
        <label class="control-label">起始时间:</label>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-6">
         <div class="input-group">
             <?php
             echo DateRangePicker::widget([
@@ -30,10 +30,34 @@ use kartik\daterange\DateRangePicker;
 </div>
 <br />
 <div class="row">
-    <div class="col-lg-1">
+    <div class="col-lg-2">
+        <label class="control-label">monthsOfYear: </label>
+    </div>
+    <div class="col-lg-10">
+        <div class="input-group">
+            <label class="checkbox-inline monthofYear"><input type="checkbox" value="1">01月</label>
+            <label class="checkbox-inline monthofYear"><input type="checkbox" value="2">02月</label>
+            <label class="checkbox-inline monthofYear"><input type="checkbox" value="4">03月</label>
+            <label class="checkbox-inline monthofYear"><input type="checkbox" value="8">04月</label>
+            <label class="checkbox-inline monthofYear"><input type="checkbox" value="16"> 05月</label>
+            <label class="checkbox-inline monthofYear"><input type="checkbox" value="32"> 06月</label>
+            <label class="checkbox-inline monthofYear"><input type="checkbox" value="64"> 07月</label>
+            <label class="checkbox-inline monthofYear"><input type="checkbox" value="128">08月</label>
+            <br />
+            <label class="checkbox-inline monthofYear"><input type="checkbox" value="256">09月</label>
+            <label class="checkbox-inline monthofYear"><input type="checkbox" value="512">10月</label>
+           <label class="checkbox-inline monthofYear"><input type="checkbox" value="1024">11月</label>
+           <label class="checkbox-inline monthofYear"><input type="checkbox" value="2048">12月</label>
+        </div>
+    </div>
+
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-2">
         <label class="control-label">dayOfMonth:</label>
     </div>
-    <div class="col-lg-11">
+    <div class="col-lg-10">
         <div class="input-group">
             <label class="checkbox-inline dayofMonth"><input type="checkbox" value="1">01号</label>
             <label class="checkbox-inline dayofMonth"><input type="checkbox" value="2">02号</label>
@@ -74,6 +98,15 @@ use kartik\daterange\DateRangePicker;
         </div>
     </div>
 
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="col-lg-11">
+    </div>
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-info" id="btn_monthly">添加</button>
+    </div>
 </div>
 
 <br />

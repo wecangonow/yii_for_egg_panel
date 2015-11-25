@@ -17,7 +17,7 @@ use kartik\daterange\DateRangePicker;
                 'useWithAddon'=>true,
                 'pluginOptions'=>[
                     'locale'=>[
-                        'format'=>'Y-m-d',
+                        'format'=>'y-m-d',
                         'separator'=>' 到 ',
                     ],
                     'opens'=>'right'
@@ -40,6 +40,15 @@ use kartik\daterange\DateRangePicker;
         </div>
     </div>
 
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="col-lg-11">
+    </div>
+    <div class="col-lg-1">
+        <button type="button" class="btn btn-info" id="btn_boot">添加</button>
+    </div>
 </div>
 
 <br />
